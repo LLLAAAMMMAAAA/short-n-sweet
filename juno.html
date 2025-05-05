@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>₊˚⊹Juno⊹₊˚₊</title>
+  <!-- Pixel font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+        margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Press Start 2P', cursive;
+  background-color: #797ac4;
+  background-image: url('junosong.png');
+  background-size: cover;
+  background-position: 99% center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.audio-player {
+  position: absolute;
+  top: 50%;
+  right: -10px; 
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+    .player-layout {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .progress-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    
+    .timer {
+      color: #979adf;
+      font-size: 0.6em;
+      text-shadow: 1px 1px #8488df;
+      writing-mode: horizontal-tb;
+    }
+
+    .progress-bar {
+      width: 16px;
+      height: 500px;
+      background-color: #b7bafd;
+      border: 2px solid #b7bafd;
+      position: relative;
+      cursor: pointer;
+      image-rendering: pixelated;
+      display: flex;
+      align-items: flex-end;
+      transform: translateX(-37px);
+    }
+
+    .progress-fill {
+      width: 100%;
+      height: 0;
+      background-color: #aaabdc;
+      image-rendering: pixelated;
+    }
+
+    .button-row {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      align-items: center;
+      transform: translateX(-50px);
+    }
+
+    .control-button {
+      width: 150px;
+      height: 150px;
+      cursor: pointer;
+      image-rendering: pixelated;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="audio-player">
+    <div class="player-layout">
+        <div class="progress-wrapper">
+            <div class="progress-bar" id="progressBar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+          
+          <div class="button-row">
+            <img src="play.png" id="playPauseBtn" class="control-button" alt="Play/Pause">
+            <img src="home.png" onclick="location.href='index.html'" class="control-button" alt="Home">
+            <div class="timer" id="timer">0:00 / 0:00</div>
+          </div>
+          
+
+    <audio id="audio" src="audio/Juno.mp3"></audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressFill = document.getElementById('progressFill');
+    const timer = document.getElementById('timer');
+
+    function togglePlayPause() {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.src = 'pause.png';
+      } else {
+        audio.pause();
+        playPauseBtn.src = 'play.png';
+      }
+    }
+
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+
+    audio.addEventListener('timeupdate', () => {
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progressFill.style.height = percent + '%';
+      timer.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+    });
+
+    progressBar.addEventListener('click', (e) => {
+      const rect = progressBar.getBoundingClientRect();
+      const clickY = e.clientY - rect.top;
+      const ratio = 1 - (clickY / progressBar.offsetHeight);
+      audio.currentTime = ratio * audio.duration;
+    });
+
+    playPauseBtn.addEventListener('click', togglePlayPause);
+  </script>
+</body>
+</html>
