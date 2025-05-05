@@ -4,38 +4,37 @@
   <title>♡⊹Short N' Sweet⊹♡</title>
   <!-- Pixel Font -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <style>
-    html, body {
-        margin: 0;
-  padding: 0;
-  font-family: 'Press Start 2P', cursive;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  background-color: #7876bd;
-  display: flex;
-  justify-content: center;
-    }
+ <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive;
+    background-color: #7876bd;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .background-box {
-      width: 800px;
-      min-height: 1000px;
-      background-image: url('background.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-color: rgba(255, 255, 255, 0); /* transparent or change as needed */
-      padding: 30px 20px 100px;
-      box-sizing: border-box;
-    }
-    .wrapper {
-      max-width: 824.58px;
-      width: 100%;
-      min-height: 2800px;
-      padding: 30px 20px 100px;
-      box-sizing: border-box;
-      background-color: rgba(181, 165, 255, 0);
-    }
+  .background-container {
+    width: 614px;
+    height: 634px;
+    background-image: url('background.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+  }
+
+  .wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 30px 20px 100px;
+    box-sizing: border-box;
+    background-color: rgba(181, 165, 255, 0); /* transparent */
+    overflow-y: auto;
+  }
 
     h1 {
       font-size: 2.6em;
@@ -69,6 +68,7 @@
   </style>
 </head>
 <body>
+    <div class="background-container">
   <div class="wrapper">
     <h1>♡⊹SC⊹♡</h1>
     <div class="button-container">
@@ -92,5 +92,7 @@
         <img src="youneedmenow.png" alt="You Need Me Now?" class="song-button" onclick="location.href='youneedmenow.html'">
       </div>      
   </div>
+    </div>
+  <div>
 </body>
 </html>
